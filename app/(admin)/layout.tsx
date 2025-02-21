@@ -9,7 +9,7 @@ import Footer from "components/footer/Footer"
 // import Navbar from "components/navbar"
 // import Sidebar from "components/sidebar"
 
-export default function Admin({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   // states and functions
   // const [open, setOpen] = useState(false)
   // const pathname = usePathname()

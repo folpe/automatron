@@ -1,10 +1,11 @@
+import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons"
 import { cva, type VariantProps } from "class-variance-authority"
-import { Form, Label } from "radix-ui"
-import React from "react"
+import { Form } from "radix-ui"
+import React, { useState } from "react"
 import { twMerge } from "tailwind-merge"
 
 const textFieldVariants = cva(
-  "mt-2 flex h-12 w-full items-center justify-center rounded-xl border border-gray-200 bg-white/0 p-3 text-sm text-gray-700 outline-none dark:!border-white/10 dark:text-white  px-3 py-2 transition-all",
+  "flex h-12 w-full items-center justify-center rounded-xl border border-gray-200 bg-white/0 p-3 text-sm text-gray-700 outline-none dark:!border-white/10 dark:text-white  px-3 py-2 transition-all",
   {
     variants: {
       variant: {
@@ -33,9 +34,15 @@ interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement>, Va
 }
 
 const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ label, icon, variant, inputSize, disabled, className, required, ...props }, ref) => {
+  ({ label, icon, variant, inputSize, disabled, className, required, type, ...props }, ref) => {
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+
+    const togglePasswordVisibility = () => {
+      setIsPasswordVisible(!isPasswordVisible)
+    }
+
     return (
-      <Form.Field name={props.name} className="flex flex-col space-y-1">
+      <Form.Field name={props.name} className="flex w-full flex-col space-y-1">
         <div className="flex items-center justify-between">
           <Form.Label className="text-sm font-medium text-gray-700">
             {label}
@@ -49,17 +56,38 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             <Form.Message match="tooShort">Trop court</Form.Message>
           </div>
         </div>
-        <div className="relative">
+        <div className="relative flex">
           {icon && <div className="absolute top-1/2 left-3 -translate-y-1/2">{icon}</div>}
           <Form.Control asChild>
             <input
               ref={ref}
-              className={twMerge(textFieldVariants({ variant, inputSize }), icon && "pl-10", className)}
+              className={twMerge(
+                textFieldVariants({ variant, inputSize }),
+                icon && "pl-10",
+                type === "password" && "pr-10",
+                className
+              )}
               disabled={disabled}
               required={required}
+              type={type === "password" ? (isPasswordVisible ? "text" : "password") : type}
               {...props}
             />
           </Form.Control>
+
+          {/* Icône pour afficher/masquer le mot de passe */}
+          {type === "password" && (
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute top-1/2 right-3 h-full -translate-y-1/2 items-center text-gray-500 hover:cursor-pointer hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
+            >
+              {isPasswordVisible ? (
+                <EyeClosedIcon className="h-5 w-5 items-center" />
+              ) : (
+                <EyeOpenIcon className="h-5 w-5 items-center" />
+              )}
+            </button>
+          )}
         </div>
       </Form.Field>
     )

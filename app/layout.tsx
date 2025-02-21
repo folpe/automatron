@@ -17,7 +17,12 @@ import "styles/tailwind.css"
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${poppins.variable} ${dmSans.variable}`}>
-      <body>{children}</body>
+      <head>
+        <title>Automatron - Automatisation Intelligente</title>
+        <meta name="description" content="Automatron simplifie votre gestion avec des workflows intelligents." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body className="flex min-h-screen flex-col">{children}</body>
     </html>
   )
 }

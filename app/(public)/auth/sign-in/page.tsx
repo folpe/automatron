@@ -1,6 +1,7 @@
 "use client"
 import { CheckIcon } from "@radix-ui/react-icons"
 
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Checkbox, Form } from "radix-ui"
 import { useEffect, useState } from "react"
@@ -63,7 +64,7 @@ function SignIn() {
           <div className="mb-4 flex items-center justify-between px-2">
             <div className="flex items-center">
               <Checkbox.Root
-                className="focus:border-brand-100 data-[state=checked]:bg-brand-500 flex size-[18px] appearance-none items-center justify-center rounded border border-gray-200 bg-white outline-none data-[state=checked]:text-white"
+                className="focus:border-brand-100 data-[state=checked]:bg-brand-500 flex aspect-square h-4 w-4 appearance-none items-center justify-center rounded border border-gray-200 bg-white outline-none data-[state=checked]:text-white"
                 id="c1"
               >
                 <Checkbox.Indicator>
@@ -74,9 +75,12 @@ function SignIn() {
                 Garder ma connexion
               </label>
             </div>
-            <a className="text-brand-500 hover:text-brand-600 text-xs font-medium dark:text-white" href="*">
+            <Link
+              className="text-brand-500 hover:text-brand-600 text-xs font-medium dark:text-white"
+              href="/auth/forgot-password"
+            >
               Mot de passe oublié ?
-            </a>
+            </Link>
           </div>
           <Form.Submit asChild>
             <Button className="w-full">Connexion</Button>
@@ -84,12 +88,12 @@ function SignIn() {
         </Form.Root>
         <div className="mt-2">
           <span className="text-xs font-medium text-gray-700 dark:text-gray-500">Pas encore inscrit ?</span>
-          <a
-            href="/auth/sign-up/default"
+          <Link
+            href="/auth/sign-up"
             className="text-brand-500 hover:text-brand-600 ml-1 text-xs font-medium dark:text-white"
           >
             Créez un compte
-          </a>
+          </Link>
         </div>
       </div>
     </div>

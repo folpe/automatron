@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Button } from "@components/Button/Button"
 
 const Header = () => {
   return (
@@ -21,9 +20,12 @@ const Header = () => {
         >
           Connexion
         </Link>
-        <Button size="sm" className="rounded-3xl">
+        <Link
+          href="/auth/sign-up"
+          className="hover:bg-brand-600 bg-brand-500 inline-flex h-full min-h-10 min-w-20 items-center justify-center rounded-3xl px-4 py-1.5 text-center text-sm text-white transition-colors delay-50 hover:cursor-pointer hover:enabled:text-white"
+        >
           Inscription
-        </Button>
+        </Link>
       </div>
     </header>
   )
