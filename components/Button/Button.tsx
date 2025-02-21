@@ -9,16 +9,15 @@ const button = cva(
     "items-center",
     "rounded-xl",
     "text-center",
-    "border",
-    "border-blue-400",
     "transition-colors",
     "delay-50",
+    "hover:cursor-pointer",
   ],
   {
     variants: {
       intent: {
-        primary: ["bg-blue-400", "text-white", "hover:enabled:bg-blue-700"],
-        secondary: ["bg-transparent", "text-blue-400", "hover:enabled:bg-blue-400", "hover:enabled:text-white"],
+        primary: ["bg-brand-500", "text-white", "hover:enabled:bg-brand-600"],
+        secondary: ["bg-transparent", "text-blue-400", "hover:enabled:bg-brand-200", "hover:enabled:text-white"],
       },
       size: {
         sm: ["min-w-20", "h-full", "min-h-10", "text-sm", "py-1.5", "px-4"],
@@ -33,15 +32,14 @@ const button = cva(
   }
 )
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLAnchorElement>, VariantProps<typeof button> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof button> {
   underline?: boolean
-  href: string
 }
 
 export function Button({ className, intent, size, underline, ...props }: ButtonProps) {
   return (
-    <a className={twMerge(button({ intent, size, className, underline }))} {...props}>
+    <button className={twMerge(button({ intent, size, className, underline }))} {...props}>
       {props.children}
-    </a>
+    </button>
   )
 }
